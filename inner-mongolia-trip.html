@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>内蒙古6日游行程计划 · 呼和浩特 → 鄂尔多斯</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+
+  :root {
+    --primary: #d97706; --primary-light: #fef3c7;
+    --blue: #2563eb; --blue-light: #dbeafe;
+    --green: #16a34a; --green-light: #dcfce7;
+    --purple: #7c3aed; --purple-light: #ede9fe;
+    --pink: #db2777; --pink-light: #fce7f3;
+    --teal: #0d9488; --teal-light: #ccfbf1;
+    --orange: #ea580c; --orange-light: #ffedd5;
+    --bg: #fafaf9; --card-bg: #ffffff;
+    --text: #292524; --text-light: #78716c;
+    --border: #e7e5e4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans SC', system-ui, sans-serif;
+    background: linear-gradient(180deg, #fff7ed 0%, #fafaf9 30%, #f0fdf4 100%);
+    min-height: 100vh; color: var(--text); line-height: 1.6;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #ea580c 0%, #d97706 40%, #ca8a04 100%);
+    color: white; padding: 2.5rem 1.5rem 3rem; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .header::after {
+    content: ''; position: absolute; bottom: -30px; left: 0; right: 0;
+    height: 60px; background: var(--bg); border-radius: 50% 50% 0 0;
+  }
+  .header h1 { font-size: 1.8rem; font-weight: 900; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+  .header .subtitle { font-size: 0.95rem; opacity: 0.9; font-weight: 300; }
+  .header .badge-row { display: flex; justify-content: center; gap: 0.6rem; margin-top: 1rem; flex-wrap: wrap; }
+  .header .badge {
+    background: rgba(255,255,255,0.2); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3); border-radius: 20px;
+    padding: 0.3rem 0.9rem; font-size: 0.8rem; font-weight: 400;
+  }
+
+  .stats-bar {
+    display: flex; justify-content: center; gap: 1.5rem;
+    padding: 1.2rem 1rem; max-width: 600px; margin: -1rem auto 1.5rem;
+    background: white; border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    position: relative; z-index: 1; flex-wrap: wrap;
+  }
+  .stat-item { text-align: center; }
+  .stat-item .stat-num { font-size: 1.5rem; font-weight: 900; color: var(--primary); }
+  .stat-item .stat-label { font-size: 0.75rem; color: var(--text-light); margin-top: -2px; }
+  .stat-divider { width: 1px; background: var(--border); }
+
+  .container { max-width: 700px; margin: 0 auto; padding: 0 1rem 3rem; }
+
+  .day-card {
+    background: var(--card-bg); border-radius: 20px; margin-bottom: 1.5rem;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.04); overflow: hidden;
+    border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .day-card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+  .day-header {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.2rem 1.4rem; cursor: pointer; user-select: none;
+  }
+  .day-header .day-badge {
+    width: 48px; height: 48px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 1.1rem; color: white; flex-shrink: 0;
+  }
+  .day-header .day-info { flex: 1; }
+  .day-header .day-title { font-weight: 700; font-size: 1.05rem; }
+  .day-header .day-date { font-size: 0.8rem; color: var(--text-light); font-weight: 400; }
+  .day-header .day-route { font-size: 0.78rem; color: var(--text-light); margin-top: 2px; }
+  .day-header .expand-icon {
+    font-size: 1.2rem; color: #a8a29e; transition: transform 0.3s; flex-shrink: 0;
+  }
+  .day-card.open .expand-icon { transform: rotate(180deg); }
+  .day-body { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1); }
+  .day-card.open .day-body { max-height: 900px; }
+  .day-body-inner { padding: 0 1.4rem 1.4rem; }
+
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 10px; top: 4px; bottom: 4px;
+    width: 2px; background: var(--border); border-radius: 1px;
+  }
+  .timeline-step { position: relative; margin-bottom: 1rem; }
+  .timeline-step:last-child { margin-bottom: 0; }
+  .timeline-step::before {
+    content: ''; position: absolute; left: -22px; top: 6px;
+    width: 10px; height: 10px; border-radius: 50%;
+    border: 2px solid white; z-index: 1;
+  }
+  .timeline-step.step-eat::before { background: var(--orange); }
+  .timeline-step.step-go::before { background: var(--blue); }
+  .timeline-step.step-play::before { background: var(--green); }
+  .timeline-step.step-sleep::before { background: var(--purple); }
+  .timeline-step.step-drive::before { background: var(--teal); }
+  .step-time { font-size: 0.72rem; font-weight: 700; color: var(--primary); letter-spacing: 0.03em; margin-bottom: 1px; }
+  .step-desc { font-size: 0.92rem; font-weight: 500; }
+  .step-detail { font-size: 0.78rem; color: var(--text-light); margin-top: 1px; }
+
+  .transport-bar {
+    display: flex; align-items: center; gap: 0.4rem;
+    padding: 0.6rem 1rem; background: #f5f5f4;
+    border-radius: 10px; margin-bottom: 1rem;
+    font-size: 0.82rem; color: var(--text-light); flex-wrap: wrap;
+  }
+  .transport-bar .transport-arrow { color: #a8a29e; }
+
+  .tag {
+    display: inline-block; font-size: 0.7rem; padding: 0.15rem 0.6rem;
+    border-radius: 10px; font-weight: 500; margin: 0.15rem 0.25rem;
+  }
+  .tag-caoyuan { background: #dcfce7; color: #166534; }
+  .tag-shamo { background: #ffedd5; color: #9a3412; }
+  .tag-bowuguan { background: #ede9fe; color: #6b21a8; }
+  .tag-meishi { background: #fce7f3; color: #9d174d; }
+  .tag-tiyan { background: #dbeafe; color: #1e40af; }
+  .tag-yanchu { background: #fef3c7; color: #92400e; }
+  .tag-xiuxian { background: #ccfbf1; color: #115e59; }
+
+  .overview-section { margin-bottom: 2rem; }
+  .overview-section h2 { font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+  .flow-row {
+    display: flex; align-items: center; gap: 0.5rem;
+    flex-wrap: wrap; justify-content: center; padding: 1rem 0.5rem;
+    background:#fff; border-radius:16px;
+    box-shadow:0 2px 16px rgba(0,0,0,0.04); border:1px solid var(--border);
+  }
+  .flow-node { display: flex; flex-direction: column; align-items: center; text-align: center; min-width: 60px; }
+  .flow-node .node-icon {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; margin-bottom: 0.3rem;
+  }
+  .flow-node .node-label { font-size: 0.7rem; font-weight: 600; line-height: 1.2; }
+  .flow-node .node-sub { font-size: 0.6rem; color: var(--text-light); }
+  .flow-arrow { font-size: 1.2rem; color: #a8a29e; flex-shrink: 0; }
+
+  .toggle-all-bar { display: flex; justify-content: flex-end; margin-bottom: 1rem; }
+  .btn-toggle {
+    background: none; border: 1px solid var(--border); border-radius: 20px;
+    padding: 0.4rem 1rem; font-size: 0.8rem; cursor: pointer;
+    color: var(--text-light); font-family: inherit; transition: all 0.2s;
+  }
+  .btn-toggle:hover { background: #f5f5f4; }
+
+  .option-card { border-radius: 12px; padding: 1rem; margin-bottom: 0.8rem; }
+  .option-card .option-title { font-weight: 700; margin-bottom: 0.5rem; }
+  .option-a { background: #dbeafe; } .option-a .option-title { color: #1e40af; }
+  .option-b { background: #ccfbf1; } .option-b .option-title { color: #115e59; }
+
+  .tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; font-size: 0.85rem; }
+  @media (max-width: 480px) { .tips-grid { grid-template-columns: 1fr; } }
+
+  .footer { text-align: center; padding: 1.5rem; font-size: 0.75rem; color: var(--text-light); }
+
+  @media (max-width: 480px) {
+    .header h1 { font-size: 1.4rem; }
+    .header { padding: 1.8rem 1rem 2.5rem; }
+    .stats-bar { gap: 0.8rem; }
+    .stat-item .stat-num { font-size: 1.2rem; }
+    .flow-node { min-width: 48px; }
+    .flow-node .node-icon { width: 36px; height: 36px; font-size: 1.1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🏜️ 内蒙古草原沙漠6日游</h1>
+  <div class="subtitle">呼和浩特 → 乌兰察布 → 鄂尔多斯</div>
+  <div class="badge-row">
+    <span class="badge">📅 7月23日 - 7月28日</span>
+    <span class="badge">🚗 自驾出行</span>
+    <span class="badge">👥 自由行</span>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">天行程</div></div>
+  <div class="stat-divider"></div>
+  <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">座城市</div></div>
+  <div class="stat-divider"></div>
+  <div class="stat-item"><div class="stat-num">~800</div><div class="stat-label">公里路程</div></div>
+  <div class="stat-divider"></div>
+  <div class="stat-item"><div class="stat-num">10+</div><div class="stat-label">景点体验</div></div>
+</div>
+
+<div class="container">
+
+  <div class="overview-section">
+    <h2>🗺️ 路线总览</h2>
+    <div class="flow-row">
+      <div class="flow-node"><div class="node-icon" style="background:#ffedd5;">🌙</div><div class="node-label">Day1</div><div class="node-sub">呼和浩特</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="node-icon" style="background:#ede9fe;">🌋</div><div class="node-label">Day2</div><div class="node-sub">乌兰哈达火山</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="node-icon" style="background:#dcfce7;">🌿</div><div class="node-label">Day3</div><div class="node-sub">辉腾锡勒草原</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="node-icon" style="background:#ffedd5;">🏜️</div><div class="node-label">Day4</div><div class="node-sub">响沙湾</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="node-icon" style="background:#dbeafe;">🐎</div><div class="node-label">Day5</div><div class="node-sub">成吉思汗陵</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="node-icon" style="background:#fce7f3;">🏠</div><div class="node-label">Day6</div><div class="node-sub">返回呼市</div></div>
+    </div>
+  </div>
+
+  <div class="toggle-all-bar">
+    <button class="btn-toggle" onclick="toggleAll()">📋 全部展开/收起</button>
+  </div>
+
+  <!-- Day 1 -->
+  <div class="day-card open">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-badge" style="background:linear-gradient(135deg,#ea580c,#f97316);">1</div>
+      <div class="day-info">
+        <div class="day-title">抵达呼和浩特 · 城市初探</div>
+        <div class="day-date">7月23日 周三</div>
+        <div class="day-route">📍 呼和浩特市区</div>
+      </div>
+      <span class="expand-icon">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="day-body-inner">
+        <div class="transport-bar">✈️ 抵达呼和浩特 → 🚗 租车 → 🏡 民宿</div>
+        <div class="timeline">
+          <div class="timeline-step step-sleep"><div class="step-time">00:05</div><div class="step-desc">抵达呼和浩特机场</div></div>
+          <div class="timeline-step step-go"><div class="step-time">00:30</div><div class="step-desc">取车 → 前往民宿</div><div class="step-detail">建议提前在App上预约好车辆</div></div>
+          <div class="timeline-step step-eat"><div class="step-time">01:00</div><div class="step-desc">到民宿，看看有没有外卖 🍜</div><div class="step-detail">刷一下外卖平台，体验内蒙古夜宵</div></div>
+          <div class="timeline-step step-sleep"><div class="step-time">01:30</div><div class="step-desc">洗漱睡觉 💤</div></div>
+          <div class="timeline-step step-eat"><div class="step-time">中午</div><div class="step-desc">自然醒 → 午餐 🥩</div><div class="step-detail">推荐：手把肉、烤羊排、蒙古奶茶</div></div>
+          <div class="timeline-step step-play"><div class="step-time">下午</div><div class="step-desc">敕勒川草原 🌿</div><div class="step-detail">"天苍苍，野茫茫，风吹草低见牛羊"</div><span class="tag tag-caoyuan">草原</span></div>
+          <div class="timeline-step step-play"><div class="step-time">下午</div><div class="step-desc">内蒙古博物院 🏛️</div><div class="step-detail">了解草原文明 & 恐龙化石（免费，需预约）</div><span class="tag tag-bowuguan">博物馆</span></div>
+          <div class="timeline-step step-eat"><div class="step-time">傍晚</div><div class="step-desc">宽巷子小吃街 🍢</div><div class="step-detail">呼和浩特最有名的小吃街：焙子、稍麦、羊杂碎</div><span class="tag tag-meishi">美食</span></div>
+          <div class="timeline-step step-play"><div class="step-time">晚上</div><div class="step-desc">逛市区 → 回民宿</div><div class="step-detail">可逛大召寺夜景、塞上老街</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 2 -->
+  <div class="day-card open">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-badge" style="background:linear-gradient(135deg,#7c3aed,#a855f7);">2</div>
+      <div class="day-info">
+        <div class="day-title">火山探秘 · 地质奇观</div>
+        <div class="day-date">7月24日 周四</div>
+        <div class="day-route">📍 呼和浩特 → 乌兰哈达火山地质公园</div>
+      </div>
+      <span class="expand-icon">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="day-body-inner">
+        <div class="transport-bar">🚗 自驾 2-3小时 约230km → 🌋 乌兰哈达火山群 → 🏡 返程民宿</div>
+        <div class="timeline">
+          <div class="timeline-step step-eat"><div class="step-time">09:30</div><div class="step-desc">自然醒 + 早餐 🥟</div><div class="step-detail">推荐：稍麦（呼和浩特特色早餐）</div></div>
+          <div class="timeline-step step-drive"><div class="step-time">10:30</div><div class="step-desc">出发前往乌兰哈达火山 🚗</div><div class="step-detail">车程约2-3小时，沿途可欣赏草原风光</div></div>
+          <div class="timeline-step step-play"><div class="step-time">13:00</div><div class="step-desc">抵达火山地质公园 🌋</div><div class="step-detail">主要游览3-6号火山，可租宇航服拍照</div><span class="tag tag-caoyuan">地质奇观</span></div>
+          <div class="timeline-step step-play"><div class="step-time">13:00-17:00</div><div class="step-desc">深度游览火山群</div><div class="step-detail">登顶火山口、捡玛瑙石、拍照打卡</div></div>
+          <div class="timeline-step step-eat"><div class="step-time">17:30</div><div class="step-desc">返程 + 晚餐 🍖</div><div class="step-detail">品尝当地特色蒙餐</div></div>
+          <div class="timeline-step step-play"><div class="step-time">晚上</div><div class="step-desc">民宿休息 或 逛市区夜景</div><span class="tag tag-xiuxian">休闲</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 3 -->
+  <div class="day-card open">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-badge" style="background:linear-gradient(135deg,#16a34a,#4ade80);">3</div>
+      <div class="day-info">
+        <div class="day-title">草原驰骋 · 奔赴鄂尔多斯</div>
+        <div class="day-date">7月25日 周五</div>
+        <div class="day-route">📍 呼和浩特 → 辉腾锡勒草原 → 鄂尔多斯</div>
+      </div>
+      <span class="expand-icon">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="day-body-inner">
+        <div class="transport-bar">🚗 辉腾锡勒草原（约1.5h） → 🚗 鄂尔多斯（约3h） → 🏡 鄂尔多斯民宿</div>
+        <div class="timeline">
+          <div class="timeline-step step-eat"><div class="step-time">09:00</div><div class="step-desc">起床 + 早餐 ☕</div></div>
+          <div class="timeline-step step-drive"><div class="step-time">10:00</div><div class="step-desc">前往辉腾锡勒草原 🚗</div><div class="step-detail">车程约1.5小时</div></div>
+          <div class="timeline-step step-play"><div class="step-time">11:30-15:00</div><div class="step-desc">辉腾锡勒草原深度游 🌿🐴</div><div class="step-detail">骑马、草原徒步、风车观赏、黄花沟</div><span class="tag tag-caoyuan">草原</span><span class="tag tag-tiyan">骑马</span></div>
+          <div class="timeline-step step-eat"><div class="step-time">13:00 左右</div><div class="step-desc">草原午餐 🥩</div><div class="step-detail">在草原上野餐或附近餐厅</div></div>
+          <div class="timeline-step step-drive"><div class="step-time">15:00</div><div class="step-desc">出发前往鄂尔多斯 🚗</div><div class="step-detail">车程约3小时</div></div>
+          <div class="timeline-step step-play"><div class="step-time">18:00</div><div class="step-desc">抵达鄂尔多斯 → 入住民宿 🏡</div></div>
+          <div class="timeline-step step-play"><div class="step-time">晚上</div><div class="step-desc">逛鄂尔多斯市区 🌃</div><div class="step-detail">康巴什新区夜景很美，可去乌兰木伦湖</div><span class="tag tag-xiuxian">休闲</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 4 -->
+  <div class="day-card open">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-badge" style="background:linear-gradient(135deg,#d97706,#fbbf24);">4</div>
+      <div class="day-info">
+        <div class="day-title">沙漠狂欢 · 响沙湾</div>
+        <div class="day-date">7月26日 周六</div>
+        <div class="day-route">📍 鄂尔多斯 → 响沙湾</div>
+      </div>
+      <span class="expand-icon">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="day-body-inner">
+        <div class="transport-bar">🚗 自驾约1小时 → 🏜️ 响沙湾 → 🏛️ 鄂尔多斯博物馆（待定）</div>
+        <div class="timeline">
+          <div class="timeline-step step-eat"><div class="step-time">09:00</div><div class="step-desc">起床 + 早餐 🥞</div></div>
+          <div class="timeline-step step-drive"><div class="step-time">10:00</div><div class="step-desc">出发前往响沙湾 🚗</div></div>
+          <div class="timeline-step step-play"><div class="step-time">11:00-17:00</div><div class="step-desc">响沙湾全天畅玩 🏜️🎢</div><div class="step-detail">🎫 一卡通含：门票 + 摆渡车 + 沙海游艇 + 滑沙<br>额外可玩：骑骆驼、沙漠摩托、高空滑索</div><span class="tag tag-shamo">沙漠</span></div>
+          <div class="timeline-step step-play"><div class="step-time">17:00</div><div class="step-desc">返程 → 待定行程</div><div class="step-detail">🏛️ <strong>鄂尔多斯博物馆·埃及文物展</strong>（需购票，与一卡通联办有优惠）<br>或直接回民宿休息</div><span class="tag tag-bowuguan">博物馆</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 5 -->
+  <div class="day-card open">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-badge" style="background:linear-gradient(135deg,#2563eb,#60a5fa);">5</div>
+      <div class="day-info">
+        <div class="day-title">文化盛宴 · 二选一</div>
+        <div class="day-date">7月27日 周日</div>
+        <div class="day-route">📍 鄂尔多斯</div>
+      </div>
+      <span class="expand-icon">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="day-body-inner">
+        <div class="transport-bar" style="background:#fef3c7;border:1px solid #fde68a;">⚠️ 两个方案二选一，可根据当天体力和兴趣灵活调整</div>
+        <div class="option-card option-a">
+          <div class="option-title">🔷 方案A：成吉思汗陵一日游</div>
+          <div class="timeline">
+            <div class="timeline-step step-eat"><div class="step-time">09:00</div><div class="step-desc">起床 + 早餐</div></div>
+            <div class="timeline-step step-play"><div class="step-desc">🐎 马术表演</div><span class="tag tag-yanchu">演出</span></div>
+            <div class="timeline-step step-play"><div class="step-desc">💃 鄂尔多斯婚礼舞剧</div><span class="tag tag-yanchu">演出</span></div>
+            <div class="timeline-step step-play"><div class="step-desc">🏹 射箭体验</div><span class="tag tag-tiyan">体验</span></div>
+            <div class="timeline-step step-play"><div class="step-desc">🛷 轨道滑草</div><span class="tag tag-caoyuan">体验</span></div>
+            <div class="timeline-step step-play"><div class="step-desc">🚌 草原交通游览</div></div>
+          </div>
+        </div>
+        <div class="option-card option-b">
+          <div class="option-title">🟢 方案B：水镜湖休闲旅游度假区</div>
+          <div class="timeline">
+            <div class="timeline-step step-eat"><div class="step-time">09:30</div><div class="step-desc">睡到自然醒 + 早餐 🥐</div></div>
+            <div class="timeline-step step-play"><div class="step-desc">🏖️ 一卡通包含多项游玩项目</div><span class="tag tag-xiuxian">休闲度假</span></div>
+            <div class="timeline-step step-play"><div class="step-desc">🌊 湖边漫步、水上项目</div></div>
+            <div class="timeline-step step-play"><div class="step-desc">🧘 轻松惬意的一天</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 6 -->
+  <div class="day-card open">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-badge" style="background:linear-gradient(135deg,#db2777,#f472b6);">6</div>
+      <div class="day-info">
+        <div class="day-title">返程 · 满载而归</div>
+        <div class="day-date">7月28日 周一</div>
+        <div class="day-route">📍 鄂尔多斯 → 呼和浩特</div>
+      </div>
+      <span class="expand-icon">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="day-body-inner">
+        <div class="transport-bar">🚗 鄂尔多斯 → 🚗 呼和浩特（约3h） → ✈️ 返程</div>
+        <div class="timeline">
+          <div class="timeline-step step-eat"><div class="step-time">09:00</div><div class="step-desc">起床 + 早餐 + 收拾行李 🧳</div></div>
+          <div class="timeline-step step-drive"><div class="step-time">10:00</div><div class="step-desc">出发返回呼和浩特 🚗</div><div class="step-detail">车程约3小时</div></div>
+          <div class="timeline-step step-eat"><div class="step-time">13:00</div><div class="step-desc">抵达呼和浩特 → 午餐</div><div class="step-detail">最后再吃一顿正宗蒙餐 🍖</div></div>
+          <div class="timeline-step step-go"><div class="step-time">下午</div><div class="step-desc">还车 → 前往机场/车站 ✈️</div><div class="step-detail">提前2小时到达，逛逛机场特产店</div></div>
+          <div class="timeline-step step-sleep"><div class="step-time"></div><div class="step-desc">🎉 行程结束，满载回忆回家！</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tips -->
+  <div style="background:#fff;border-radius:20px;padding:1.4rem;margin-top:0.5rem;box-shadow:0 2px 16px rgba(0,0,0,0.04);border:1px solid var(--border);">
+    <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:0.8rem;">💡 出行小贴士</h2>
+    <div class="tips-grid">
+      <div>🧴 <strong>防晒必备</strong><br><span style="color:var(--text-light);">草原+沙漠紫外线强</span></div>
+      <div>🧥 <strong>带件外套</strong><br><span style="color:var(--text-light);">草原早晚温差大</span></div>
+      <div>📱 <strong>离线地图</strong><br><span style="color:var(--text-light);">部分区域信号弱</span></div>
+      <div>💊 <strong>常用药品</strong><br><span style="color:var(--text-light);">晕车药、肠胃药</span></div>
+      <div>👟 <strong>舒适鞋子</strong><br><span style="color:var(--text-light);">火山+沙漠徒步多</span></div>
+      <div>📷 <strong>充电宝</strong><br><span style="color:var(--text-light);">拍照多，电量告急</span></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">🌾 天苍苍，野茫茫，风吹草低见牛羊 · 祝旅途愉快！🌾</div>
+
+<script>
+function toggleDay(h){h.parentElement.classList.toggle('open');}
+function toggleAll(){var c=document.querySelectorAll('.day-card');var o=Array.from(c).every(function(x){return x.classList.contains('open')});c.forEach(function(x){if(o)x.classList.remove('open');else x.classList.add('open');});}
+</script>
+
+</body>
+</html>
