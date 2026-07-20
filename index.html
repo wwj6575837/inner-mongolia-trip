@@ -83,7 +83,7 @@
   }
   .day-card.open .expand-icon { transform: rotate(180deg); }
   .day-body { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1); }
-  .day-card.open .day-body { max-height: 900px; }
+  .day-card.open .day-body { max-height: 1200px; }
   .day-body-inner { padding: 0 1.4rem 1.4rem; }
 
   .timeline { position: relative; padding-left: 28px; }
@@ -103,6 +103,7 @@
   .timeline-step.step-play::before { background: var(--green); }
   .timeline-step.step-sleep::before { background: var(--purple); }
   .timeline-step.step-drive::before { background: var(--teal); }
+  .timeline-step.step-photo::before { background: var(--pink); }
   .step-time { font-size: 0.72rem; font-weight: 700; color: var(--primary); letter-spacing: 0.03em; margin-bottom: 1px; }
   .step-desc { font-size: 0.92rem; font-weight: 500; }
   .step-detail { font-size: 0.78rem; color: var(--text-light); margin-top: 1px; }
@@ -200,7 +201,7 @@
   <div class="overview-section">
     <h2>🗺️ 路线总览</h2>
     <div class="flow-row">
-      <div class="flow-node"><div class="node-icon" style="background:#ffedd5;">🌙</div><div class="node-label">Day1</div><div class="node-sub">呼和浩特</div></div>
+      <div class="flow-node"><div class="node-icon" style="background:#ffedd5;">👘</div><div class="node-label">Day1</div><div class="node-sub">敕勒川·红石崖</div></div>
       <div class="flow-arrow">→</div>
       <div class="flow-node"><div class="node-icon" style="background:#ede9fe;">🌋</div><div class="node-label">Day2</div><div class="node-sub">乌兰哈达火山</div></div>
       <div class="flow-arrow">→</div>
@@ -208,7 +209,7 @@
       <div class="flow-arrow">→</div>
       <div class="flow-node"><div class="node-icon" style="background:#ffedd5;">🏜️</div><div class="node-label">Day4</div><div class="node-sub">响沙湾</div></div>
       <div class="flow-arrow">→</div>
-      <div class="flow-node"><div class="node-icon" style="background:#dbeafe;">🐎</div><div class="node-label">Day5</div><div class="node-sub">成吉思汗陵</div></div>
+      <div class="flow-node"><div class="node-icon" style="background:#dbeafe;">🤔</div><div class="node-label">Day5</div><div class="node-sub">待定</div></div>
       <div class="flow-arrow">→</div>
       <div class="flow-node"><div class="node-icon" style="background:#fce7f3;">🏠</div><div class="node-label">Day6</div><div class="node-sub">返回呼市</div></div>
     </div>
@@ -223,25 +224,29 @@
     <div class="day-header" onclick="toggleDay(this)">
       <div class="day-badge" style="background:linear-gradient(135deg,#ea580c,#f97316);">1</div>
       <div class="day-info">
-        <div class="day-title">抵达呼和浩特 · 城市初探</div>
+        <div class="day-title">抵达呼和浩特 · 妆造拍摄日</div>
         <div class="day-date">7月23日 周三</div>
-        <div class="day-route">📍 呼和浩特市区</div>
+        <div class="day-route">📍 呼和浩特 → 敕勒川草原 → 红石崖</div>
       </div>
       <span class="expand-icon">▼</span>
     </div>
     <div class="day-body">
       <div class="day-body-inner">
-        <div class="transport-bar">✈️ 抵达呼和浩特 → 🚗 租车 → 🏡 民宿</div>
+        <div class="transport-bar">✈️ 抵达呼和浩特 → 🚕 打车 → 🏡 民宿 → 🚗 取车 → 👘 妆造 → 🌿 敕勒川 → ⛰️ 红石崖</div>
         <div class="timeline">
           <div class="timeline-step step-sleep"><div class="step-time">00:05</div><div class="step-desc">抵达呼和浩特机场</div></div>
-          <div class="timeline-step step-go"><div class="step-time">00:30</div><div class="step-desc">取车 → 前往民宿</div><div class="step-detail">建议提前在App上预约好车辆</div></div>
+          <div class="timeline-step step-go"><div class="step-time">00:30</div><div class="step-desc">打车 → 前往民宿 🚕</div><div class="step-detail">机场打车到民宿，约30-40分钟</div></div>
           <div class="timeline-step step-eat"><div class="step-time">01:00</div><div class="step-desc">到民宿，看看有没有外卖 🍜</div><div class="step-detail">刷一下外卖平台，体验内蒙古夜宵</div></div>
           <div class="timeline-step step-sleep"><div class="step-time">01:30</div><div class="step-desc">洗漱睡觉 💤</div></div>
-          <div class="timeline-step step-eat"><div class="step-time">中午</div><div class="step-desc">自然醒 → 午餐 🥩</div><div class="step-detail">推荐：手把肉、烤羊排、蒙古奶茶</div></div>
-          <div class="timeline-step step-play"><div class="step-time">下午</div><div class="step-desc">敕勒川草原 🌿</div><div class="step-detail">"天苍苍，野茫茫，风吹草低见牛羊"</div><span class="tag tag-caoyuan">草原</span></div>
-          <div class="timeline-step step-play"><div class="step-time">下午</div><div class="step-desc">内蒙古博物院 🏛️</div><div class="step-detail">了解草原文明 & 恐龙化石（免费，需预约）</div><span class="tag tag-bowuguan">博物馆</span></div>
-          <div class="timeline-step step-eat"><div class="step-time">傍晚</div><div class="step-desc">宽巷子小吃街 🍢</div><div class="step-detail">呼和浩特最有名的小吃街：焙子、稍麦、羊杂碎</div><span class="tag tag-meishi">美食</span></div>
-          <div class="timeline-step step-play"><div class="step-time">晚上</div><div class="step-desc">逛市区 → 回民宿</div><div class="step-detail">可逛大召寺夜景、塞上老街</div></div>
+          <div class="timeline-step step-eat"><div class="step-time">中午</div><div class="step-desc">自然醒 😴</div></div>
+          <div class="timeline-step step-go"><div class="step-time">12:00</div><div class="step-desc">取车 🚗</div></div>
+          <div class="timeline-step step-eat"><div class="step-time">12:30</div><div class="step-desc">妆造店附近吃午饭 🥩</div></div>
+          <div class="timeline-step step-photo"><div class="step-time">14:00</div><div class="step-desc">开始做妆造 👘💄</div><div class="step-detail">蒙古族服饰妆造，为草原大片做准备</div></div>
+          <div class="timeline-step step-drive"><div class="step-time">15:00</div><div class="step-desc">出发前往敕勒川草原 🚗🌿</div><div class="step-detail">"天苍苍，野茫茫，风吹草低见牛羊"</div><span class="tag tag-caoyuan">草原</span></div>
+          <div class="timeline-step step-drive"><div class="step-time">18:00</div><div class="step-desc">前往红石崖 ⛰️</div><div class="step-detail">欣赏红石崖壮美风光</div><span class="tag tag-caoyuan">自然风光</span></div>
+          <div class="timeline-step step-drive"><div class="step-time">20:10</div><div class="step-desc">返程 🚗</div></div>
+          <div class="timeline-step step-eat"><div class="step-time">21:40</div><div class="step-desc">吃晚饭 🍖</div><div class="step-detail">品尝当地特色美食</div><span class="tag tag-meishi">美食</span></div>
+          <div class="timeline-step step-sleep"><div class="step-time">晚上</div><div class="step-desc">回民宿休息 💤</div></div>
         </div>
       </div>
     </div>
@@ -329,7 +334,7 @@
     <div class="day-header" onclick="toggleDay(this)">
       <div class="day-badge" style="background:linear-gradient(135deg,#2563eb,#60a5fa);">5</div>
       <div class="day-info">
-        <div class="day-title">文化盛宴 · 二选一</div>
+        <div class="day-title">自由安排 · 待定</div>
         <div class="day-date">7月27日 周日</div>
         <div class="day-route">📍 鄂尔多斯</div>
       </div>
@@ -337,26 +342,10 @@
     </div>
     <div class="day-body">
       <div class="day-body-inner">
-        <div class="transport-bar" style="background:#fef3c7;border:1px solid #fde68a;">⚠️ 两个方案二选一，可根据当天体力和兴趣灵活调整</div>
-        <div class="option-card option-a">
-          <div class="option-title">🔷 方案A：成吉思汗陵一日游</div>
-          <div class="timeline">
-            <div class="timeline-step step-eat"><div class="step-time">09:00</div><div class="step-desc">起床 + 早餐</div></div>
-            <div class="timeline-step step-play"><div class="step-desc">🐎 马术表演</div><span class="tag tag-yanchu">演出</span></div>
-            <div class="timeline-step step-play"><div class="step-desc">💃 鄂尔多斯婚礼舞剧</div><span class="tag tag-yanchu">演出</span></div>
-            <div class="timeline-step step-play"><div class="step-desc">🏹 射箭体验</div><span class="tag tag-tiyan">体验</span></div>
-            <div class="timeline-step step-play"><div class="step-desc">🛷 轨道滑草</div><span class="tag tag-caoyuan">体验</span></div>
-            <div class="timeline-step step-play"><div class="step-desc">🚌 草原交通游览</div></div>
-          </div>
-        </div>
-        <div class="option-card option-b">
-          <div class="option-title">🟢 方案B：水镜湖休闲旅游度假区</div>
-          <div class="timeline">
-            <div class="timeline-step step-eat"><div class="step-time">09:30</div><div class="step-desc">睡到自然醒 + 早餐 🥐</div></div>
-            <div class="timeline-step step-play"><div class="step-desc">🏖️ 一卡通包含多项游玩项目</div><span class="tag tag-xiuxian">休闲度假</span></div>
-            <div class="timeline-step step-play"><div class="step-desc">🌊 湖边漫步、水上项目</div></div>
-            <div class="timeline-step step-play"><div class="step-desc">🧘 轻松惬意的一天</div></div>
-          </div>
+        <div class="transport-bar">🤔 行程待定，到时候根据体力和心情灵活安排</div>
+        <div class="timeline">
+          <div class="timeline-step step-eat"><div class="step-time">随意</div><div class="step-desc">睡到自然醒 🌞</div></div>
+          <div class="timeline-step step-play"><div class="step-desc">🎯 到时候再决定去哪个景点</div><div class="step-detail">可选：成吉思汗陵 / 水镜湖 / 鄂尔多斯市区深度游</div></div>
         </div>
       </div>
     </div>
@@ -367,20 +356,21 @@
     <div class="day-header" onclick="toggleDay(this)">
       <div class="day-badge" style="background:linear-gradient(135deg,#db2777,#f472b6);">6</div>
       <div class="day-info">
-        <div class="day-title">返程 · 满载而归</div>
+        <div class="day-title">返程 · 博物院收官</div>
         <div class="day-date">7月28日 周一</div>
-        <div class="day-route">📍 鄂尔多斯 → 呼和浩特</div>
+        <div class="day-route">📍 鄂尔多斯 → 呼和浩特 → ✈️</div>
       </div>
       <span class="expand-icon">▼</span>
     </div>
     <div class="day-body">
       <div class="day-body-inner">
-        <div class="transport-bar">🚗 鄂尔多斯 → 🚗 呼和浩特（约3h） → ✈️ 返程</div>
+        <div class="transport-bar">🚗 鄂尔多斯 → 🚗 呼和浩特（约3h） → 🏛️ 内蒙古博物院 → ✈️ 机场</div>
         <div class="timeline">
-          <div class="timeline-step step-eat"><div class="step-time">09:00</div><div class="step-desc">起床 + 早餐 + 收拾行李 🧳</div></div>
-          <div class="timeline-step step-drive"><div class="step-time">10:00</div><div class="step-desc">出发返回呼和浩特 🚗</div><div class="step-detail">车程约3小时</div></div>
-          <div class="timeline-step step-eat"><div class="step-time">13:00</div><div class="step-desc">抵达呼和浩特 → 午餐</div><div class="step-detail">最后再吃一顿正宗蒙餐 🍖</div></div>
-          <div class="timeline-step step-go"><div class="step-time">下午</div><div class="step-desc">还车 → 前往机场/车站 ✈️</div><div class="step-detail">提前2小时到达，逛逛机场特产店</div></div>
+          <div class="timeline-step step-eat"><div class="step-time">08:00-09:00</div><div class="step-desc">起床 + 早餐 🥟</div></div>
+          <div class="timeline-step step-drive"><div class="step-time">09:00</div><div class="step-desc">出发返回呼和浩特 🚗</div><div class="step-detail">车程约3小时</div></div>
+          <div class="timeline-step step-eat"><div class="step-time">12:00</div><div class="step-desc">抵达呼和浩特 → 午餐 🍖</div><div class="step-detail">最后再吃一顿正宗蒙餐</div></div>
+          <div class="timeline-step step-play"><div class="step-time">下午</div><div class="step-desc">内蒙古博物院 🏛️</div><div class="step-detail">了解草原文明 & 恐龙化石（免费，需预约）</div><span class="tag tag-bowuguan">博物馆</span></div>
+          <div class="timeline-step step-go"><div class="step-time">16:30</div><div class="step-desc">前往机场/车站 ✈️</div><div class="step-detail">还车 → 前往机场，逛逛特产店</div></div>
           <div class="timeline-step step-sleep"><div class="step-time"></div><div class="step-desc">🎉 行程结束，满载回忆回家！</div></div>
         </div>
       </div>
